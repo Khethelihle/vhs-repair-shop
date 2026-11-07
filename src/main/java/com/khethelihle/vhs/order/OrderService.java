@@ -1,13 +1,13 @@
 package com.khethelihle.vhs.order;
 
 import com.khethelihle.vhs.product.Product;
-import com.khethelihle.vhs.product.ProductController;
 import com.khethelihle.vhs.product.ProductRepository;
-import com.khethelihle.vhs.product.ProductService;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class OrderService {
 
     private final OrderRepository orderRepository;
@@ -30,7 +30,7 @@ public class OrderService {
                     Product product = productRepository
                             .findById(item.productId())
                             .orElseThrow( () ->
-                                    new RuntimeException("product not found: " + item.productId()
+                                    new RuntimeException("Product not found: " + item.productId()
                                     )
                             );
 
@@ -44,6 +44,12 @@ public class OrderService {
         CustomerOrder order = new CustomerOrder(items);
 
         return orderRepository.save(order);
+    }
+
+    public CustomerOrder getById(Long id) {
+        return orderRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Order not found: " + id));
     }
 
     public List<CustomerOrder> getAll() {

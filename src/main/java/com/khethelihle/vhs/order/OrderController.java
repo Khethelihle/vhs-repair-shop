@@ -19,7 +19,7 @@ public class OrderController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CustomerOrder create (
-            @Valid @ResponseBody OrderRequest request) {
+            @Valid @RequestBody OrderRequest request) {
 
         return service.create(request);
     }

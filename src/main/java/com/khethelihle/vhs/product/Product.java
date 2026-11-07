@@ -1,11 +1,11 @@
 package com.khethelihle.vhs.product;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "products")
 public class Product {
 
     @Id
@@ -28,6 +28,18 @@ public class Product {
 
     public Long getId() {
         return id;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
     }
 
 }
