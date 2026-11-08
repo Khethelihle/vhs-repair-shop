@@ -1,5 +1,6 @@
 package com.khethelihle.vhs.product;
 
+import com.khethelihle.vhs.auth.Constants;
 import com.khethelihle.vhs.exception.ResourceNotFoundException;
 import org.junit.jupiter.api.Test;
 
@@ -9,6 +10,7 @@ import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
 import static org.springframework.test.web.servlet.request
         .MockMvcRequestBuilders.*;
 
@@ -37,6 +39,7 @@ public class ProductControllerTest {
                 """;
 
         mockMvc.perform(post("/api/products")
+                        .with(httpBasic(Constants.username, Constants.password))
                         .contentType(APPLICATION_JSON)
                         .content(request))
                 .andExpect(status().isCreated())
@@ -48,7 +51,8 @@ public class ProductControllerTest {
     @Test
     void shouldReturnAllProducts() throws Exception {
 
-        mockMvc.perform(get("/api/products"))
+        mockMvc.perform(get("/api/products")
+                        .with(httpBasic(Constants.username, Constants.password)))
                 .andExpect(status().isOk());
     }
 
@@ -56,7 +60,8 @@ public class ProductControllerTest {
     void shouldReturnNotFoundForMissingProduct()
             throws Exception {
 
-        mockMvc.perform(get("/api/products/999"))
+        mockMvc.perform(get("/api/products/999")
+                        .with(httpBasic(Constants.username, Constants.password)))
                 .andExpect(status().isNotFound());
     }
 
@@ -72,6 +77,7 @@ public class ProductControllerTest {
                 """;
 
         mockMvc.perform(post("/api/products")
+                        .with(httpBasic(Constants.username, Constants.password))
                         .contentType(APPLICATION_JSON)
                         .content(request))
                 .andExpect(status().isBadRequest());

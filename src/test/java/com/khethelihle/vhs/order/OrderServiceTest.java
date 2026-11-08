@@ -4,9 +4,11 @@ import com.khethelihle.vhs.exception.ResourceNotFoundException;
 import com.khethelihle.vhs.product.Product;
 import com.khethelihle.vhs.product.ProductRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 import static org.mockito.ArgumentMatchers.any;
 
+@ExtendWith(MockitoExtension.class)
 class OrderServiceTest {
 
     @Mock
@@ -50,7 +53,7 @@ class OrderServiceTest {
         CustomerOrder result = service.create(request);
 
         assertEquals(
-                new BigDecimal("9000"),
+                new BigDecimal("9000.00"),
                 result.getTotalAmount()
         );
 
@@ -61,7 +64,6 @@ class OrderServiceTest {
 
     @Test
     void shouldFailWhenProductDoesNotExist() {
-
         when(productRepository.findById(99L))
                 .thenReturn(Optional.empty());
 

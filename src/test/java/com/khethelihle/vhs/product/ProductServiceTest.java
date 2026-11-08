@@ -26,7 +26,6 @@ class ProductServiceTest {
     @Test
     void shouldCreateproduct() {
 
-        // Running Request test
         ProductRequest request = new ProductRequest(
                 "Carbon-ceramic",
                 "High Performance brakes",
@@ -73,7 +72,6 @@ class ProductServiceTest {
 
         @Test
         void shouldThrowExceptionWhenProductDoesNotExist() {
-
             when(repository.findById(55L))
                     .thenReturn(Optional.empty());
 
