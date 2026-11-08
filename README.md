@@ -12,9 +12,13 @@ How to run this application and test all endpoints. Ensure you at the project ro
 ### Run individual test 
 
 `mvn test -Dtest=ProductServiceTest`
+
 `mvn test -Dtest=ProductControllerTest`
+
 `mvn test -Dtest=OrderServiceTest`
+
 `mvn test -Dtest=OrderControllerTest`
+
 `mvn test -Dtest=SecurityIntegrationTest`
 
 ##### Once the application is running, access the following links to test the API and run queries against the database to see Products and Orders. Check [GetProductTest.sql](https://github.com/Khethelihle/vhs-repair-shop/blob/features/src/test/java/com/khethelihle/vhs/sql/GetProductTest.sql)
